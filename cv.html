@@ -1,0 +1,1427 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="color-scheme" content="light"/>
+  <title>CV Builder — JobsDrops</title>
+  <meta name="description" content="Generate a clean PDF CV directly in your browser. Powered by JobsDrops."/>
+  <link rel="canonical" href="https://jobsdrops.co.za/cv.html"/>
+  <link rel="stylesheet" href="assets/css/styles.css"/>
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml"/>
+</head>
+<body>
+<header class="topbar">
+  <div class="container">
+    <div class="topbar-inner">
+      <a class="brand" href="index.html" aria-label="JobsDrops home">
+        <span class="logo" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M7 7h10v10H7z" stroke="white" stroke-width="2" opacity=".9"/>
+            <path d="M9 12h6" stroke="white" stroke-width="2" stroke-linecap="round"/>
+            <path d="M12 9v6" stroke="white" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <span>
+          JobsDrops
+          <small>Opportunities, simplified.</small>
+        </span>
+      </a>
+
+      <nav class="nav" aria-label="Primary navigation">
+        <a class="js-navlink" href="index.html">Home</a>
+        <a class="js-navlink" href="weekly.html">Weekly Drops</a>
+        <a class="js-navlink" href="students.html">Students</a>
+        <a class="js-navlink" href="graduates.html">Graduates</a>
+        <a class="js-navlink" href="learnerships.html">Learnerships</a>
+        <a class="js-navlink" href="bursaries.html">Bursaries</a>
+        <a class="js-navlink" href="cv.html">CV Builder</a>
+        <a class="js-navlink" href="about.html">About</a>
+        <a class="js-navlink" href="contact.html">Contact</a>
+      </nav>
+    </div>
+
+    <div class="nav-scroll" aria-label="Mobile navigation (scroll)">
+      <a class="nav-pill js-navpill" href="index.html">Home</a>
+      <a class="nav-pill js-navpill" href="weekly.html">Weekly</a>
+      <a class="nav-pill js-navpill" href="students.html">Students</a>
+      <a class="nav-pill js-navpill" href="graduates.html">Grads</a>
+      <a class="nav-pill js-navpill" href="learnerships.html">Learnerships</a>
+      <a class="nav-pill js-navpill" href="bursaries.html">Bursaries</a>
+      <a class="nav-pill js-navpill" href="jobs.html">Jobs</a>
+      <a class="nav-pill js-navpill" href="learn.html">Learn</a>
+      <a class="nav-pill js-navpill" href="cv.html">CV</a>
+      <a class="nav-pill js-navpill" href="about.html">About</a>
+      <a class="nav-pill js-navpill" href="contact.html">Contact</a>
+    </div>
+  </div>
+</header>
+<main>
+  <section class="hero">
+    <div class="container">
+      <div class="hero-card">
+        <h1 class="h1">CV Builder</h1>
+        <p class="sub">Fill in your details and generate a clean PDF CV. Everything is created in your browser.</p>
+
+        <div class="section-head" style="margin-top:14px">
+          <div>
+            <h2>Build your CV</h2>
+            <p>Export as PDF and send it anywhere.</p>
+          </div>
+          <div class="tools">
+            <button id="genPdf" class="btn primary" type="button">Generate PDF</button>
+            <button id="resetCv" class="btn" type="button">Clear</button>
+          </div>
+        </div>
+
+        <div id="cvErr" class="small" style="display:none;margin-top:10px;color:var(--bad);font-weight:800">
+          PDF engine failed to load. Please refresh and try again.
+        </div>
+
+        <div class="grid" style="margin-top:14px">
+          <div class="card" style="grid-column:span 7; min-height:auto">
+            <div class="card-top"><span class="badge">Basics</span></div>
+            <div style="padding:14px">
+              <label class="small" style="display:block;margin-bottom:6px;font-weight:800;color:var(--muted)">Full name</label>
+              <input id="fullName" class="input" placeholder="John Doe" style="width:100%" required/>
+
+              <div style="height:10px"></div>
+              <div class="grid" style="gap:10px">
+                <div style="grid-column:span 6">
+                  <label class="small" style="display:block;margin-bottom:6px;font-weight:800;color:var(--muted)">Phone</label>
+                  <input id="phone" class="input" placeholder="07x xxx xxxx" style="width:100%"/>
+                </div>
+                <div style="grid-column:span 6">
+                  <label class="small" style="display:block;margin-bottom:6px;font-weight:800;color:var(--muted)">Email</label>
+                  <input id="email" class="input" type="email" placeholder="john.doe@email.com" style="width:100%"/>
+                </div>
+              </div>
+
+              <div style="height:10px"></div>
+              <label class="small" style="display:block;margin-bottom:6px;font-weight:800;color:var(--muted)">City & province</label>
+              <input id="location" class="input" placeholder="Johannesburg, Gauteng" style="width:100%"/>
+
+              <div style="height:10px"></div>
+              <label class="small" style="display:block;margin-bottom:6px;font-weight:800;color:var(--muted)">Links (optional)</label>
+              <input id="links" class="input" placeholder="linkedin.com/in/johndoe" style="width:100%"/>
+
+              <div style="height:12px"></div>
+              <label class="small" style="display:block;margin-bottom:6px;font-weight:800;color:var(--muted)">Profile summary</label>
+              <textarea id="summary" class="input" placeholder="Motivated final‑year student with strong communication and analytical skills. Seeking an internship in..." style="width:100%;min-height:110px;resize:vertical"></textarea>
+
+              <div style="height:12px"></div>
+              <label class="small" style="display:block;margin-bottom:6px;font-weight:800;color:var(--muted)">Skills (comma separated)</label>
+              <input id="skills" class="input" placeholder="Excel, Communication, Problem solving, Teamwork" style="width:100%"/>
+            </div>
+          </div>
+
+          <div class="card" style="grid-column:span 5; min-height:auto">
+            <div class="card-top">
+              <span class="badge">Education</span></div>
+            <div id="eduWrap" style="padding:14px; display:grid; gap:12px"></div>
+<div style="padding:0 14px 14px"><button id="addEdu" class="btn" type="button">Add qualification</button></div>
+            <div style="padding:0 14px 14px" class="small">Add as many qualifications as you want.</div>
+          </div>
+        </div>
+
+        <div class="grid" style="margin-top:14px">
+          <div class="card" style="grid-column:span 12; min-height:auto">
+            <div class="card-top">
+              <span class="badge">Experience</span></div>
+            <div id="expWrap" style="padding:14px; display:grid; gap:12px"></div>
+<div style="padding:0 14px 14px"><button id="addExp" class="btn" type="button">Add experience</button></div>
+          </div>
+        </div>
+
+        <details class="card" style="margin-top:14px; grid-column:span 12; min-height:auto">
+          <summary class="card-top" style="cursor:pointer; list-style:none">
+            <span class="badge">Projects (optional)</span>
+            <span class="small" style="margin-left:10px;color:var(--muted);font-weight:800">Click to open</span>
+            <span style="margin-left:auto;color:var(--muted);font-weight:900">▾</span>
+          </summary>
+          <div style="padding:14px">
+            <div class="section-head" style="margin:0 0 10px">
+              <div><h2 style="margin:0;font-size:16px">Projects</h2><p style="margin:0">Optional, only if you have projects.</p></div>
+              <div class="tools"><button id="addProj" class="btn" type="button">Add project</button></div>
+            </div>
+            <div id="projWrap" style="display:grid; gap:12px"></div>
+          </div>
+        </details>
+
+        <details class="card" style="margin-top:14px; grid-column:span 12; min-height:auto">
+          <summary class="card-top" style="cursor:pointer; list-style:none">
+            <span class="badge">Certificates (optional)</span>
+            <span class="small" style="margin-left:10px;color:var(--muted);font-weight:800">Click to open</span>
+            <span style="margin-left:auto;color:var(--muted);font-weight:900">▾</span>
+          </summary>
+          <div style="padding:14px">
+            <div class="section-head" style="margin:0 0 10px">
+              <div><h2 style="margin:0;font-size:16px">Certificates</h2><p style="margin:0">Optional, add if you have them.</p></div>
+              <div class="tools"><button id="addCert" class="btn" type="button">Add certificate</button></div>
+            </div>
+            <div id="certWrap" style="display:grid; gap:12px"></div>
+          </div>
+        </details>
+
+        <div class="ad-slot" style="margin-top:14px">----</div>
+      </div>
+    </div>
+  </section>
+</main>
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="brand" style="gap:10px">
+          <span class="logo" aria-hidden="true" style="width:34px;height:34px;border-radius:12px">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M7 7h10v10H7z" stroke="white" stroke-width="2" opacity=".9"/>
+              <path d="M9 12h6" stroke="white" stroke-width="2" stroke-linecap="round"/>
+              <path d="M12 9v6" stroke="white" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </span>
+          <span>
+            JobsDrops
+            <small>Built for South Africa • Mobile‑first • Fast</small>
+          </span>
+        </div>
+      </div>
+      <div>
+        <p class="small" style="margin:0 0 10px">
+          Pages: <a href="students.html">Students</a> • <a href="graduates.html">Graduates</a> • <a href="learnerships.html">Learnerships</a> • <a href="bursaries.html">Bursaries</a> • <a href="cv.html">CV Builder</a>
+        </p>
+        <p class="small" style="margin:0">
+          Legal: <a href="privacy.html">Privacy</a> • <a href="terms.html">Terms</a> • <a href="disclaimer.html">Disclaimer</a>
+          <br/>
+          © 2026 JobsDrops. All rights reserved.
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" crossorigin="anonymous"></script>
+<script>
+(function(){
+  const $ = (id)=>document.getElementById(id);
+
+  function el(tag, attrs={}, children=[]){
+    const n = document.createElement(tag);
+    Object.entries(attrs).forEach(([k,v])=>{
+      if(k === "class") n.className = v;
+      else if(k === "html") n.innerHTML = v;
+      else n.setAttribute(k,v);
+    });
+    children.forEach(c=> n.appendChild(c));
+    return n;
+  }
+
+  function field(label, inputEl){
+    const wrap = el("div");
+    const lab = el("label", { class:"small", style:"display:block;margin-bottom:6px;font-weight:800;color:var(--muted)" });
+    lab.textContent = label;
+    wrap.appendChild(lab);
+    wrap.appendChild(inputEl);
+    return wrap;
+  }
+
+  function input(ph){
+    return el("input",{ class:"input", placeholder:ph, style:"width:100%" });
+  }
+  function textarea(ph, h=110){
+    return el("textarea",{ class:"input", placeholder:ph, style:`width:100%;min-height:${h}px;resize:vertical` });
+  }
+  function select(options){
+    const s = el("select",{ class:"input", style:"width:100%" });
+    options.forEach(o=>{
+      const opt = el("option",{ value:o.value });
+      opt.textContent = o.label;
+      s.appendChild(opt);
+    });
+    return s;
+  }
+
+  // datalists
+  const ensureDatalist = (id, values)=>{
+    let dl = document.getElementById(id);
+    if(!dl){
+      dl = el("datalist",{id});
+      document.body.appendChild(dl);
+    }
+    dl.innerHTML = "";
+    values.forEach(v=> dl.appendChild(el("option",{value:v})) );
+    return dl;
+  };
+
+  ensureDatalist("qualifications", [
+    "Higher Certificate","Diploma","Advanced Diploma","Bachelor of Arts (BA)","Bachelor of Commerce (BCom)",
+    "Bachelor of Science (BSc)","Bachelor of Engineering (BEng)","Bachelor of Education (BEd)",
+    "Honours Degree","Master’s Degree"
+  ]);
+  ensureDatalist("universities", [
+    "University of Johannesburg (UJ)","University of Venda (UNIVEN)","University of the Free State (UFS)",
+    "University of the Western Cape (UWC)","University of Pretoria (UP)","Tshwane University of Technology (TUT)",
+    "University of Cape Town (UCT)","University of the Witwatersrand (Wits)","Stellenbosch University",
+    "University of KwaZulu-Natal (UKZN)","North-West University (NWU)","University of South Africa (UNISA)",
+    "Rhodes University","University of Limpopo","Cape Peninsula University of Technology (CPUT)",
+    "Vaal University of Technology (VUT)","Nelson Mandela University (NMU)","Durban University of Technology (DUT)",
+    "Central University of Technology (CUT)","Sefako Makgatho Health Sciences University (SMU)",
+    "Walter Sisulu University (WSU)","University of Fort Hare","University of Mpumalanga","Sol Plaatje University"
+  ]);
+
+  // --------- Dynamic cards (renumbering) ----------
+  function makeRowCard(titleText){
+    const box = el("div",{ "data-card":"1", style:"border:1px solid rgba(229,231,235,.92);border-radius:14px;padding:12px;background:rgba(255,255,255,.75)" });
+    const head = el("div",{ style:"display:flex;gap:10px;align-items:center;justify-content:space-between;margin-bottom:10px" });
+    const t = el("div",{ "data-title":"1", style:"font-weight:900;color:var(--text)" });
+    t.textContent = titleText;
+
+    const rm = el("button",{ type:"button", class:"btn", style:"padding:9px 10px" });
+    rm.textContent = "Remove";
+    rm.addEventListener("click", ()=>{
+      box.remove();
+      renumberAll();
+    });
+
+    head.appendChild(t); head.appendChild(rm);
+    box.appendChild(head);
+    return box;
+  }
+
+  function eduCard(){
+    const card = makeRowCard("Qualification 1");
+
+    const q = input("e.g., Bachelor of Science"); q.setAttribute("list","qualifications"); q.setAttribute("data-edu","qual");
+    const i = input("e.g., University of Johannesburg (UJ)"); i.setAttribute("list","universities"); i.setAttribute("data-edu","inst");
+
+    const status = select([{value:"Completed",label:"Completed"},{value:"Still studying",label:"Still studying"}]); status.setAttribute("data-edu","status");
+    const year = select([{value:"",label:"—"},{value:"1st year",label:"1st year"},{value:"2nd year",label:"2nd year"},{value:"3rd year",label:"3rd year"},{value:"Final year",label:"Final year"},{value:"Postgraduate",label:"Postgraduate"}]); year.setAttribute("data-edu","year");
+
+    const start = input("Start year (e.g., 2023)"); start.setAttribute("data-edu","start");
+    const end = input("End year (e.g., 2026)"); end.setAttribute("data-edu","end");
+    const notes = textarea("Achievements / modules (optional)", 90); notes.setAttribute("data-edu","notes");
+
+    const g = el("div",{ class:"form-grid", style:"gap:12px" });
+    const c1 = el("div",{ style:"grid-column:span 12" }); c1.appendChild(field("Qualification", q));
+    const c2 = el("div",{ style:"grid-column:span 12" }); c2.appendChild(field("University / College", i));
+    const c3 = el("div",{ style:"grid-column:span 6" }); c3.appendChild(field("Status", status));
+    const c4 = el("div",{ style:"grid-column:span 6" }); c4.appendChild(field("Year / Level", year));
+    const c5 = el("div",{ style:"grid-column:span 6" }); c5.appendChild(field("Start year", start));
+    const c6 = el("div",{ style:"grid-column:span 6" }); c6.appendChild(field("End year", end));
+    const c7 = el("div",{ style:"grid-column:span 12" }); c7.appendChild(field("Notes (optional)", notes));
+    [c1,c2,c3,c4,c5,c6,c7].forEach(n=>g.appendChild(n));
+    card.appendChild(g);
+    return card;
+  }
+
+  function expCard(){
+    const card = makeRowCard("Experience 1");
+
+    const title = input("Role — Company"); title.setAttribute("data-exp","title");
+    const dates = input("Dates (e.g., Jun 2024 – Dec 2024)"); dates.setAttribute("data-exp","dates");
+    const bullets = textarea("Bullets (one per line)", 110); bullets.setAttribute("data-exp","bullets");
+
+    const g = el("div",{ class:"form-grid", style:"gap:12px" });
+    const c1 = el("div",{ style:"grid-column:span 12" }); c1.appendChild(field("Role + Company", title));
+    const c2 = el("div",{ style:"grid-column:span 12" }); c2.appendChild(field("Dates", dates));
+    const c3 = el("div",{ style:"grid-column:span 12" }); c3.appendChild(field("Bullets", bullets));
+    [c1,c2,c3].forEach(n=>g.appendChild(n));
+    card.appendChild(g);
+    return card;
+  }
+
+  function renumber(container, label){
+    const cards = Array.from(container.querySelectorAll('[data-card="1"]'));
+    cards.forEach((card, idx)=>{
+      const title = card.querySelector('[data-title="1"]');
+      if(title) title.textContent = `${label} ${idx+1}`;
+    });
+  }
+
+  function renumberAll(){
+    renumber($("eduWrap"), "Qualification");
+    renumber($("expWrap"), "Experience");
+    // optional sections keep their own numbering visually (OK)
+  }
+
+  function addEdu(){
+    $("eduWrap").appendChild(eduCard());
+    renumberAll();
+  }
+  function addExp(){
+    $("expWrap").appendChild(expCard());
+    renumberAll();
+  }
+
+  $("addEdu").addEventListener("click", addEdu);
+  $("addExp").addEventListener("click", addExp);
+
+  // seed: 1 edu + 1 exp
+  $("eduWrap").innerHTML = "";
+  $("expWrap").innerHTML = "";
+  addEdu();
+  addExp();
+
+  $("resetCv").addEventListener("click", ()=>{
+    document.querySelectorAll("input, textarea").forEach(el=>el.value="");
+    document.querySelectorAll("select").forEach(el=>el.selectedIndex=0);
+    $("eduWrap").innerHTML = "";
+    $("expWrap").innerHTML = "";
+    $("projWrap") && ($("projWrap").innerHTML = "");
+    $("certWrap") && ($("certWrap").innerHTML = "");
+    addEdu();
+    addExp();
+  });
+
+  // Optional sections keep existing markup buttons if present
+  // (They exist in the HTML already)
+  let projCount = 0, certCount = 0;
+
+  function makeSimpleRow(titleText, fields){
+    const card = makeRowCard(titleText);
+    const g = el("div",{ class:"form-grid", style:"gap:12px" });
+    fields.forEach(f=> g.appendChild(f));
+    card.appendChild(g);
+    return card;
+  }
+
+  const addProjBtn = $("addProj");
+  if(addProjBtn){
+    addProjBtn.addEventListener("click", ()=>{
+      projCount++;
+      const t = input("Project name"); t.setAttribute("data-proj","title");
+      const tools = input("Tools / tech (optional)"); tools.setAttribute("data-proj","tools");
+      const bullets = textarea("Bullets (one per line)", 110); bullets.setAttribute("data-proj","bullets");
+
+      const c1 = el("div",{ style:"grid-column:span 12" }); c1.appendChild(field("Project", t));
+      const c2 = el("div",{ style:"grid-column:span 12" }); c2.appendChild(field("Tools / tech (optional)", tools));
+      const c3 = el("div",{ style:"grid-column:span 12" }); c3.appendChild(field("What you did", bullets));
+      const card = makeSimpleRow("Project " + projCount, [c1,c2,c3]);
+      $("projWrap").appendChild(card);
+    });
+  }
+
+  const addCertBtn = $("addCert");
+  if(addCertBtn){
+    addCertBtn.addEventListener("click", ()=>{
+      certCount++;
+      const name = input("Certificate name"); name.setAttribute("data-cert","name");
+      const provider = input("Provider (optional)"); provider.setAttribute("data-cert","provider");
+      const year = input("Year (optional)"); year.setAttribute("data-cert","year");
+
+      const c1 = el("div",{ style:"grid-column:span 12" }); c1.appendChild(field("Name", name));
+      const c2 = el("div",{ style:"grid-column:span 6" }); c2.appendChild(field("Provider", provider));
+      const c3 = el("div",{ style:"grid-column:span 6" }); c3.appendChild(field("Year", year));
+      const card = makeSimpleRow("Certificate " + certCount, [c1,c2,c3]);
+      $("certWrap").appendChild(card);
+    });
+  }
+
+  // --------- PDF (prettier layout) ----------
+  function splitLines(txt){
+    return (txt || "").split(/\r?\n/).map(s=>s.trim()).filter(Boolean);
+  }
+  function getVal(id){ const n = $(id); return n ? (n.value||"").trim() : ""; }
+
+  function pdfLoaded(){
+    return window.jspdf && window.jspdf.jsPDF;
+  }
+
+  function drawHeading(doc, fullName, contactLine){
+    // soft header bar
+    doc.setFillColor(241,245,249);
+    doc.rect(0, 0, 210, 34, "F");
+    doc.setTextColor(15,23,42);
+    doc.setFont("helvetica","bold");
+    doc.setFontSize(22);
+    doc.text(fullName, 14, 20);
+
+    if(contactLine){
+      doc.setFont("helvetica","normal");
+      doc.setFontSize(10.5);
+      doc.setTextColor(71,85,105);
+      const wrap = doc.splitTextToSize(contactLine, 180);
+      doc.text(wrap, 14, 28);
+    }
+    doc.setTextColor(15,23,42);
+  }
+
+  function section(doc, title, y){
+    doc.setFont("helvetica","bold");
+    doc.setFontSize(11);
+    doc.setTextColor(30,41,59);
+    doc.text(title.toUpperCase(), 14, y);
+    doc.setDrawColor(226,232,240);
+    doc.setLineWidth(0.7);
+    doc.line(14, y+2, 196, y+2);
+    doc.setTextColor(15,23,42);
+    return y + 9;
+  }
+
+  function ensurePage(doc, y, extra){
+    const pageH = doc.internal.pageSize.getHeight();
+    if(y + extra > pageH - 18){
+      doc.addPage();
+      drawHeading(doc, currentName, currentContact); // repeat header on new page
+      return 44;
+    }
+    return y;
+  }
+
+  let currentName = "";
+  let currentContact = "";
+
+  $("genPdf").addEventListener("click", ()=>{
+    if(!pdfLoaded()){
+      $("cvErr").style.display = "block";
+      alert("PDF engine failed to load. Please refresh and try again.");
+      return;
+    }
+
+    const fullName = getVal("fullName");
+    if(!fullName){
+      alert("Please enter your full name.");
+      return;
+    }
+
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF({ unit: "mm", format: "a4" });
+
+    currentName = fullName;
+
+    const contactBits = [ getVal("location"), getVal("phone"), getVal("email"), getVal("links") ].filter(Boolean);
+    currentContact = contactBits.join(" • ");
+
+    drawHeading(doc, fullName, currentContact);
+
+    let y = 44;
+
+    const summary = getVal("summary");
+    if(summary){
+      y = section(doc, "Profile", y);
+      doc.setFont("helvetica","normal");
+      doc.setFontSize(10.5);
+      doc.setTextColor(51,65,85);
+      const lines = doc.splitTextToSize(summary, 182);
+      doc.text(lines, 14, y);
+      y += lines.length * 5.2 + 2;
+      doc.setTextColor(15,23,42);
+    }
+
+    const skills = getVal("skills").split(",").map(s=>s.trim()).filter(Boolean);
+    if(skills.length){
+      y = ensurePage(doc, y, 18);
+      y = section(doc, "Skills", y);
+      doc.setFont("helvetica","normal");
+      doc.setFontSize(10.5);
+      doc.setTextColor(51,65,85);
+      // two-column skill bullets
+      const colW = 88;
+      const leftX = 14;
+      const rightX = 108;
+      let ly = y, ry = y;
+      skills.forEach((s, idx)=>{
+        const x = (idx % 2 === 0) ? leftX : rightX;
+        const yy = (idx % 2 === 0) ? ly : ry;
+        doc.text("• " + s, x, yy);
+        if(idx % 2 === 0) ly += 6;
+        else ry += 6;
+      });
+      y = Math.max(ly, ry) + 2;
+      doc.setTextColor(15,23,42);
+    }
+
+    const eduCards = Array.from(document.querySelectorAll("#eduWrap > [data-card='1']"));
+    if(eduCards.length){
+      y = ensurePage(doc, y, 22);
+      y = section(doc, "Education", y);
+      eduCards.forEach(card=>{
+        y = ensurePage(doc, y, 22);
+        const q = card.querySelector("[data-edu='qual']")?.value?.trim() || "";
+        const inst = card.querySelector("[data-edu='inst']")?.value?.trim() || "";
+        const status = card.querySelector("[data-edu='status']")?.value || "";
+        const year = card.querySelector("[data-edu='year']")?.value || "";
+        const start = card.querySelector("[data-edu='start']")?.value?.trim() || "";
+        const end = card.querySelector("[data-edu='end']")?.value?.trim() || "";
+        const notes = card.querySelector("[data-edu='notes']")?.value?.trim() || "";
+
+        doc.setFont("helvetica","bold");
+        doc.setFontSize(11);
+        doc.setTextColor(15,23,42);
+        doc.text([q, inst].filter(Boolean).join(" — ") || "Qualification", 14, y);
+        y += 5.6;
+
+        doc.setFont("helvetica","normal");
+        doc.setFontSize(10.5);
+        doc.setTextColor(51,65,85);
+        const bits = [];
+        if(status) bits.push(status);
+        if(year) bits.push(year);
+        const range = [start,end].filter(Boolean).join(" – ");
+        if(range) bits.push(range);
+        if(bits.length){
+          doc.text(bits.join(" • "), 14, y);
+          y += 6;
+        }
+        if(notes){
+          const nl = doc.splitTextToSize(notes, 182);
+          doc.text(nl, 14, y);
+          y += nl.length * 5.2 + 2;
+        } else {
+          y += 2;
+        }
+        doc.setTextColor(15,23,42);
+      });
+    }
+
+    const expCards = Array.from(document.querySelectorAll("#expWrap > [data-card='1']"));
+    if(expCards.length){
+      y = ensurePage(doc, y, 22);
+      y = section(doc, "Experience", y);
+      expCards.forEach(card=>{
+        y = ensurePage(doc, y, 28);
+        const t = card.querySelector("[data-exp='title']")?.value?.trim() || "Experience";
+        const d = card.querySelector("[data-exp='dates']")?.value?.trim() || "";
+        const bullets = splitLines(card.querySelector("[data-exp='bullets']")?.value || "");
+
+        doc.setFont("helvetica","bold");
+        doc.setFontSize(11);
+        doc.setTextColor(15,23,42);
+        doc.text(t, 14, y);
+        y += 5.6;
+
+        doc.setFont("helvetica","normal");
+        doc.setFontSize(10.5);
+        doc.setTextColor(51,65,85);
+        if(d){
+          doc.text(d, 14, y);
+          y += 6;
+        }
+        bullets.forEach(b=>{
+          y = ensurePage(doc, y, 10);
+          const bl = doc.splitTextToSize("• " + b, 182);
+          doc.text(bl, 14, y);
+          y += bl.length * 5.2;
+        });
+        y += 2;
+        doc.setTextColor(15,23,42);
+      });
+    }
+
+    // Projects (optional)
+    const projCards = Array.from(document.querySelectorAll("#projWrap > [data-card='1']"));
+    if(projCards.length){
+      y = ensurePage(doc, y, 22);
+      y = section(doc, "Projects", y);
+      projCards.forEach(card=>{
+        y = ensurePage(doc, y, 26);
+        const t = card.querySelector("[data-proj='title']")?.value?.trim() || "Project";
+        const tools = card.querySelector("[data-proj='tools']")?.value?.trim() || "";
+        const bullets = splitLines(card.querySelector("[data-proj='bullets']")?.value || "");
+
+        doc.setFont("helvetica","bold");
+        doc.setFontSize(11);
+        doc.setTextColor(15,23,42);
+        doc.text(t, 14, y);
+        y += 5.6;
+
+        doc.setFont("helvetica","normal");
+        doc.setFontSize(10.5);
+        doc.setTextColor(51,65,85);
+        if(tools){
+          doc.text(tools, 14, y);
+          y += 6;
+        }
+        bullets.forEach(b=>{
+          y = ensurePage(doc, y, 10);
+          const bl = doc.splitTextToSize("• " + b, 182);
+          doc.text(bl, 14, y);
+          y += bl.length * 5.2;
+        });
+        y += 2;
+        doc.setTextColor(15,23,42);
+      });
+    }
+
+    // Certificates (optional)
+    const certCards = Array.from(document.querySelectorAll("#certWrap > [data-card='1']"));
+    if(certCards.length){
+      y = ensurePage(doc, y, 18);
+      y = section(doc, "Certificates", y);
+      doc.setFont("helvetica","normal");
+      doc.setFontSize(10.5);
+      doc.setTextColor(51,65,85);
+      certCards.forEach(card=>{
+        y = ensurePage(doc, y, 10);
+        const name = card.querySelector("[data-cert='name']")?.value?.trim() || "";
+        const prov = card.querySelector("[data-cert='provider']")?.value?.trim() || "";
+        const year = card.querySelector("[data-cert='year']")?.value?.trim() || "";
+        const line = [name, prov, year].filter(Boolean).join(" • ");
+        if(line){
+          const wl = doc.splitTextToSize("• " + line, 182);
+          doc.text(wl, 14, y);
+          y += wl.length * 5.2;
+        }
+      });
+      y += 2;
+      doc.setTextColor(15,23,42);
+    }
+
+    // Branding bottom-right on every page
+    const pages = doc.getNumberOfPages();
+    for(let p=1; p<=pages; p++){
+      doc.setPage(p);
+      const pageH = doc.internal.pageSize.getHeight();
+      const xRight = 196;
+      doc.setFont("helvetica","normal");
+      doc.setFontSize(9);
+      doc.setTextColor(100,116,139);
+      doc.text("Powered by JOBSDROPS", xRight, pageH - 12, { align:"right" });
+      doc.text("Opportunities, simplified.", xRight, pageH - 7, { align:"right" });
+      doc.setTextColor(15,23,42);
+    }
+
+    // Download to device (with fallback)
+    const filename = (fullName.replace(/\s+/g,"_") || "CV") + "_JobsDrops.pdf";
+    try{
+      doc.save(filename);
+    } catch(e){
+      const blob = doc.output("blob");
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(()=>{ try{ window.open(url, "_blank"); }catch(_){} }, 200);
+      setTimeout(()=>URL.revokeObjectURL(url), 2000);
+    }
+  });
+})();
+</script>
+
+<!-- Listing modal -->
+<div id="listingModal" class="modal-overlay" aria-hidden="true">
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-top">
+      <div>
+        <div id="modalTitle" class="modal-title">Listing</div>
+        <div id="modalMeta" class="modal-meta"></div>
+      </div>
+      <button id="modalClose" class="modal-close" type="button">Close</button>
+    </div>
+    <div class="modal-body">
+      <h3>Summary</h3>
+      <p id="modalSummary"></p>
+
+      <h3>Description</h3>
+      <p id="modalDescription"></p>
+
+      <h3>Requirements</h3>
+      <ul id="modalRequirements"></ul>
+
+      <h3>How to apply</h3>
+      <p id="modalHow"></p>
+
+      <div class="modal-actions">
+        <a id="modalApply" class="btn btn-apply" href="#" target="_blank" rel="noopener">Apply</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+(function(){
+  const overlay = document.getElementById('listingModal');
+  if(!overlay) return;
+  const card = overlay.querySelector('.modal-card');
+  const closeBtn = document.getElementById('modalClose');
+
+  const t = document.getElementById('modalTitle');
+  const meta = document.getElementById('modalMeta');
+  const summary = document.getElementById('modalSummary');
+  const desc = document.getElementById('modalDescription');
+  const req = document.getElementById('modalRequirements');
+  const how = document.getElementById('modalHow');
+  const apply = document.getElementById('modalApply');
+
+  function openModal(fromCard){
+    const title = fromCard.getAttribute('data-title') || 'Listing';
+    const location = fromCard.getAttribute('data-location') || '';
+    const type = fromCard.getAttribute('data-type') || '';
+    const pay = fromCard.getAttribute('data-pay') || 'Unspecified';
+    const closing = fromCard.getAttribute('data-deadline') || '';
+
+    const s = fromCard.querySelector('[data-detail="summary"]')?.textContent?.trim() || '';
+    const d = fromCard.querySelector('[data-detail="description"]')?.textContent?.trim() || '';
+    const h = fromCard.querySelector('[data-detail="how"]')?.textContent?.trim() || '';
+    const r = Array.from(fromCard.querySelectorAll('[data-detail="requirements"] li')).map(li=>li.textContent.trim()).filter(Boolean);
+    const link = fromCard.getAttribute('data-apply') || fromCard.querySelector('a[href]')?.getAttribute('href') || '#';
+
+    t.textContent = title;
+    meta.textContent = [location, type, ("Pay: " + pay), (closing ? ("Closes: " + closing) : "")].filter(Boolean).join(' • ');
+    summary.textContent = s;
+    desc.textContent = d;
+    how.textContent = h;
+    req.innerHTML = '';
+    (r.length ? r : ["No requirements listed."]).forEach(x=>{
+      const li = document.createElement('li');
+      li.textContent = x;
+      req.appendChild(li);
+    });
+
+    apply.href = link;
+    overlay.classList.add('is-open');
+    overlay.setAttribute('aria-hidden','false');
+
+    // restart animation
+    card.style.animation = 'none';
+    // eslint-disable-next-line no-unused-expressions
+    card.offsetHeight;
+    card.style.animation = '';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal(){
+    overlay.classList.remove('is-open');
+    overlay.setAttribute('aria-hidden','true');
+    document.body.style.overflow = '';
+  }
+
+  document.addEventListener('click', (e)=>{
+    const btn = e.target.closest('[data-action="readmore"]');
+    if(btn){
+      const listing = btn.closest('[data-listing="1"]');
+      if(listing){
+        e.preventDefault();
+        openModal(listing);
+      }
+      return;
+    }
+    if(e.target === overlay) closeModal();
+  });
+
+  closeBtn?.addEventListener('click', closeModal);
+  document.addEventListener('keydown', (e)=>{
+    if(e.key === 'Escape' && overlay.classList.contains('is-open')) closeModal();
+  });
+})();
+</script>
+
+</body>
+</html>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" crossorigin="anonymous"></script>
+<script>
+(function(){
+  const $ = (id)=>document.getElementById(id);
+
+  function el(tag, attrs={}, children=[]){
+    const n = document.createElement(tag);
+    Object.entries(attrs).forEach(([k,v])=>{
+      if(k === "class") n.className = v;
+      else if(k === "html") n.innerHTML = v;
+      else n.setAttribute(k,v);
+    });
+    children.forEach(c=> n.appendChild(c));
+    return n;
+  }
+
+  function field(label, inputEl){
+    const wrap = el("div");
+    const lab = el("label", { class:"small", style:"display:block;margin-bottom:6px;font-weight:800;color:var(--muted)" });
+    lab.textContent = label;
+    wrap.appendChild(lab);
+    wrap.appendChild(inputEl);
+    return wrap;
+  }
+
+  function input(ph){
+    return el("input",{ class:"input", placeholder:ph, style:"width:100%" });
+  }
+  function textarea(ph, h=110){
+    return el("textarea",{ class:"input", placeholder:ph, style:`width:100%;min-height:${h}px;resize:vertical` });
+  }
+  function select(options){
+    const s = el("select",{ class:"input", style:"width:100%" });
+    options.forEach(o=>{
+      const opt = el("option",{ value:o.value });
+      opt.textContent = o.label;
+      s.appendChild(opt);
+    });
+    return s;
+  }
+
+  // datalists
+  const ensureDatalist = (id, values)=>{
+    let dl = document.getElementById(id);
+    if(!dl){
+      dl = el("datalist",{id});
+      document.body.appendChild(dl);
+    }
+    dl.innerHTML = "";
+    values.forEach(v=> dl.appendChild(el("option",{value:v})) );
+    return dl;
+  };
+
+  ensureDatalist("qualifications", [
+    "Higher Certificate","Diploma","Advanced Diploma","Bachelor of Arts (BA)","Bachelor of Commerce (BCom)",
+    "Bachelor of Science (BSc)","Bachelor of Engineering (BEng)","Bachelor of Education (BEd)",
+    "Honours Degree","Master’s Degree"
+  ]);
+  ensureDatalist("universities", [
+    "University of Johannesburg (UJ)","University of Venda (UNIVEN)","University of the Free State (UFS)",
+    "University of the Western Cape (UWC)","University of Pretoria (UP)","Tshwane University of Technology (TUT)",
+    "University of Cape Town (UCT)","University of the Witwatersrand (Wits)","Stellenbosch University",
+    "University of KwaZulu-Natal (UKZN)","North-West University (NWU)","University of South Africa (UNISA)",
+    "Rhodes University","University of Limpopo","Cape Peninsula University of Technology (CPUT)",
+    "Vaal University of Technology (VUT)","Nelson Mandela University (NMU)","Durban University of Technology (DUT)",
+    "Central University of Technology (CUT)","Sefako Makgatho Health Sciences University (SMU)",
+    "Walter Sisulu University (WSU)","University of Fort Hare","University of Mpumalanga","Sol Plaatje University"
+  ]);
+
+  // --------- Dynamic cards (renumbering) ----------
+  function makeRowCard(titleText){
+    const box = el("div",{ "data-card":"1", style:"border:1px solid rgba(229,231,235,.92);border-radius:14px;padding:12px;background:rgba(255,255,255,.75)" });
+    const head = el("div",{ style:"display:flex;gap:10px;align-items:center;justify-content:space-between;margin-bottom:10px" });
+    const t = el("div",{ "data-title":"1", style:"font-weight:900;color:var(--text)" });
+    t.textContent = titleText;
+
+    const rm = el("button",{ type:"button", class:"btn", style:"padding:9px 10px" });
+    rm.textContent = "Remove";
+    rm.addEventListener("click", ()=>{
+      box.remove();
+      renumberAll();
+    });
+
+    head.appendChild(t); head.appendChild(rm);
+    box.appendChild(head);
+    return box;
+  }
+
+  function eduCard(){
+    const card = makeRowCard("Qualification 1");
+
+    const q = input("e.g., Bachelor of Science"); q.setAttribute("list","qualifications"); q.setAttribute("data-edu","qual");
+    const i = input("e.g., University of Johannesburg (UJ)"); i.setAttribute("list","universities"); i.setAttribute("data-edu","inst");
+
+    const status = select([{value:"Completed",label:"Completed"},{value:"Still studying",label:"Still studying"}]); status.setAttribute("data-edu","status");
+    const year = select([{value:"",label:"—"},{value:"1st year",label:"1st year"},{value:"2nd year",label:"2nd year"},{value:"3rd year",label:"3rd year"},{value:"Final year",label:"Final year"},{value:"Postgraduate",label:"Postgraduate"}]); year.setAttribute("data-edu","year");
+
+    const start = input("Start year (e.g., 2023)"); start.setAttribute("data-edu","start");
+    const end = input("End year (e.g., 2026)"); end.setAttribute("data-edu","end");
+    const notes = textarea("Achievements / modules (optional)", 90); notes.setAttribute("data-edu","notes");
+
+    const g = el("div",{ class:"form-grid", style:"gap:12px" });
+    const c1 = el("div",{ style:"grid-column:span 12" }); c1.appendChild(field("Qualification", q));
+    const c2 = el("div",{ style:"grid-column:span 12" }); c2.appendChild(field("University / College", i));
+    const c3 = el("div",{ style:"grid-column:span 6" }); c3.appendChild(field("Status", status));
+    const c4 = el("div",{ style:"grid-column:span 6" }); c4.appendChild(field("Year / Level", year));
+    const c5 = el("div",{ style:"grid-column:span 6" }); c5.appendChild(field("Start year", start));
+    const c6 = el("div",{ style:"grid-column:span 6" }); c6.appendChild(field("End year", end));
+    const c7 = el("div",{ style:"grid-column:span 12" }); c7.appendChild(field("Notes (optional)", notes));
+    [c1,c2,c3,c4,c5,c6,c7].forEach(n=>g.appendChild(n));
+    card.appendChild(g);
+    return card;
+  }
+
+  function expCard(){
+    const card = makeRowCard("Experience 1");
+
+    const title = input("Role — Company"); title.setAttribute("data-exp","title");
+    const dates = input("Dates (e.g., Jun 2024 – Dec 2024)"); dates.setAttribute("data-exp","dates");
+    const bullets = textarea("Bullets (one per line)", 110); bullets.setAttribute("data-exp","bullets");
+
+    const g = el("div",{ class:"form-grid", style:"gap:12px" });
+    const c1 = el("div",{ style:"grid-column:span 12" }); c1.appendChild(field("Role + Company", title));
+    const c2 = el("div",{ style:"grid-column:span 12" }); c2.appendChild(field("Dates", dates));
+    const c3 = el("div",{ style:"grid-column:span 12" }); c3.appendChild(field("Bullets", bullets));
+    [c1,c2,c3].forEach(n=>g.appendChild(n));
+    card.appendChild(g);
+    return card;
+  }
+
+  function renumber(container, label){
+    const cards = Array.from(container.querySelectorAll('[data-card="1"]'));
+    cards.forEach((card, idx)=>{
+      const title = card.querySelector('[data-title="1"]');
+      if(title) title.textContent = `${label} ${idx+1}`;
+    });
+  }
+
+  function renumberAll(){
+    renumber($("eduWrap"), "Qualification");
+    renumber($("expWrap"), "Experience");
+    // optional sections keep their own numbering visually (OK)
+  }
+
+  function addEdu(){
+    $("eduWrap").appendChild(eduCard());
+    renumberAll();
+  }
+  function addExp(){
+    $("expWrap").appendChild(expCard());
+    renumberAll();
+  }
+
+  $("addEdu").addEventListener("click", addEdu);
+  $("addExp").addEventListener("click", addExp);
+
+  // seed: 1 edu + 1 exp
+  $("eduWrap").innerHTML = "";
+  $("expWrap").innerHTML = "";
+  addEdu();
+  addExp();
+
+  $("resetCv").addEventListener("click", ()=>{
+    document.querySelectorAll("input, textarea").forEach(el=>el.value="");
+    document.querySelectorAll("select").forEach(el=>el.selectedIndex=0);
+    $("eduWrap").innerHTML = "";
+    $("expWrap").innerHTML = "";
+    $("projWrap") && ($("projWrap").innerHTML = "");
+    $("certWrap") && ($("certWrap").innerHTML = "");
+    addEdu();
+    addExp();
+  });
+
+  // Optional sections keep existing markup buttons if present
+  // (They exist in the HTML already)
+  let projCount = 0, certCount = 0;
+
+  function makeSimpleRow(titleText, fields){
+    const card = makeRowCard(titleText);
+    const g = el("div",{ class:"form-grid", style:"gap:12px" });
+    fields.forEach(f=> g.appendChild(f));
+    card.appendChild(g);
+    return card;
+  }
+
+  const addProjBtn = $("addProj");
+  if(addProjBtn){
+    addProjBtn.addEventListener("click", ()=>{
+      projCount++;
+      const t = input("Project name"); t.setAttribute("data-proj","title");
+      const tools = input("Tools / tech (optional)"); tools.setAttribute("data-proj","tools");
+      const bullets = textarea("Bullets (one per line)", 110); bullets.setAttribute("data-proj","bullets");
+
+      const c1 = el("div",{ style:"grid-column:span 12" }); c1.appendChild(field("Project", t));
+      const c2 = el("div",{ style:"grid-column:span 12" }); c2.appendChild(field("Tools / tech (optional)", tools));
+      const c3 = el("div",{ style:"grid-column:span 12" }); c3.appendChild(field("What you did", bullets));
+      const card = makeSimpleRow("Project " + projCount, [c1,c2,c3]);
+      $("projWrap").appendChild(card);
+    });
+  }
+
+  const addCertBtn = $("addCert");
+  if(addCertBtn){
+    addCertBtn.addEventListener("click", ()=>{
+      certCount++;
+      const name = input("Certificate name"); name.setAttribute("data-cert","name");
+      const provider = input("Provider (optional)"); provider.setAttribute("data-cert","provider");
+      const year = input("Year (optional)"); year.setAttribute("data-cert","year");
+
+      const c1 = el("div",{ style:"grid-column:span 12" }); c1.appendChild(field("Name", name));
+      const c2 = el("div",{ style:"grid-column:span 6" }); c2.appendChild(field("Provider", provider));
+      const c3 = el("div",{ style:"grid-column:span 6" }); c3.appendChild(field("Year", year));
+      const card = makeSimpleRow("Certificate " + certCount, [c1,c2,c3]);
+      $("certWrap").appendChild(card);
+    });
+  }
+
+  // --------- PDF (prettier layout) ----------
+  function splitLines(txt){
+    return (txt || "").split(/\r?\n/).map(s=>s.trim()).filter(Boolean);
+  }
+  function getVal(id){ const n = $(id); return n ? (n.value||"").trim() : ""; }
+
+  function pdfLoaded(){
+    return window.jspdf && window.jspdf.jsPDF;
+  }
+
+  function drawHeading(doc, fullName, contactLine){
+    // soft header bar
+    doc.setFillColor(241,245,249);
+    doc.rect(0, 0, 210, 34, "F");
+    doc.setTextColor(15,23,42);
+    doc.setFont("helvetica","bold");
+    doc.setFontSize(22);
+    doc.text(fullName, 14, 20);
+
+    if(contactLine){
+      doc.setFont("helvetica","normal");
+      doc.setFontSize(10.5);
+      doc.setTextColor(71,85,105);
+      const wrap = doc.splitTextToSize(contactLine, 180);
+      doc.text(wrap, 14, 28);
+    }
+    doc.setTextColor(15,23,42);
+  }
+
+  function section(doc, title, y){
+    doc.setFont("helvetica","bold");
+    doc.setFontSize(11);
+    doc.setTextColor(30,41,59);
+    doc.text(title.toUpperCase(), 14, y);
+    doc.setDrawColor(226,232,240);
+    doc.setLineWidth(0.7);
+    doc.line(14, y+2, 196, y+2);
+    doc.setTextColor(15,23,42);
+    return y + 9;
+  }
+
+  function ensurePage(doc, y, extra){
+    const pageH = doc.internal.pageSize.getHeight();
+    if(y + extra > pageH - 18){
+      doc.addPage();
+      drawHeading(doc, currentName, currentContact); // repeat header on new page
+      return 44;
+    }
+    return y;
+  }
+
+  let currentName = "";
+  let currentContact = "";
+
+  $("genPdf").addEventListener("click", ()=>{
+    if(!pdfLoaded()){
+      $("cvErr").style.display = "block";
+      alert("PDF engine failed to load. Please refresh and try again.");
+      return;
+    }
+
+    const fullName = getVal("fullName");
+    if(!fullName){
+      alert("Please enter your full name.");
+      return;
+    }
+
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF({ unit: "mm", format: "a4" });
+
+    currentName = fullName;
+
+    const contactBits = [ getVal("location"), getVal("phone"), getVal("email"), getVal("links") ].filter(Boolean);
+    currentContact = contactBits.join(" • ");
+
+    drawHeading(doc, fullName, currentContact);
+
+    let y = 44;
+
+    const summary = getVal("summary");
+    if(summary){
+      y = section(doc, "Profile", y);
+      doc.setFont("helvetica","normal");
+      doc.setFontSize(10.5);
+      doc.setTextColor(51,65,85);
+      const lines = doc.splitTextToSize(summary, 182);
+      doc.text(lines, 14, y);
+      y += lines.length * 5.2 + 2;
+      doc.setTextColor(15,23,42);
+    }
+
+    const skills = getVal("skills").split(",").map(s=>s.trim()).filter(Boolean);
+    if(skills.length){
+      y = ensurePage(doc, y, 18);
+      y = section(doc, "Skills", y);
+      doc.setFont("helvetica","normal");
+      doc.setFontSize(10.5);
+      doc.setTextColor(51,65,85);
+      // two-column skill bullets
+      const colW = 88;
+      const leftX = 14;
+      const rightX = 108;
+      let ly = y, ry = y;
+      skills.forEach((s, idx)=>{
+        const x = (idx % 2 === 0) ? leftX : rightX;
+        const yy = (idx % 2 === 0) ? ly : ry;
+        doc.text("• " + s, x, yy);
+        if(idx % 2 === 0) ly += 6;
+        else ry += 6;
+      });
+      y = Math.max(ly, ry) + 2;
+      doc.setTextColor(15,23,42);
+    }
+
+    const eduCards = Array.from(document.querySelectorAll("#eduWrap > [data-card='1']"));
+    if(eduCards.length){
+      y = ensurePage(doc, y, 22);
+      y = section(doc, "Education", y);
+      eduCards.forEach(card=>{
+        y = ensurePage(doc, y, 22);
+        const q = card.querySelector("[data-edu='qual']")?.value?.trim() || "";
+        const inst = card.querySelector("[data-edu='inst']")?.value?.trim() || "";
+        const status = card.querySelector("[data-edu='status']")?.value || "";
+        const year = card.querySelector("[data-edu='year']")?.value || "";
+        const start = card.querySelector("[data-edu='start']")?.value?.trim() || "";
+        const end = card.querySelector("[data-edu='end']")?.value?.trim() || "";
+        const notes = card.querySelector("[data-edu='notes']")?.value?.trim() || "";
+
+        doc.setFont("helvetica","bold");
+        doc.setFontSize(11);
+        doc.setTextColor(15,23,42);
+        doc.text([q, inst].filter(Boolean).join(" — ") || "Qualification", 14, y);
+        y += 5.6;
+
+        doc.setFont("helvetica","normal");
+        doc.setFontSize(10.5);
+        doc.setTextColor(51,65,85);
+        const bits = [];
+        if(status) bits.push(status);
+        if(year) bits.push(year);
+        const range = [start,end].filter(Boolean).join(" – ");
+        if(range) bits.push(range);
+        if(bits.length){
+          doc.text(bits.join(" • "), 14, y);
+          y += 6;
+        }
+        if(notes){
+          const nl = doc.splitTextToSize(notes, 182);
+          doc.text(nl, 14, y);
+          y += nl.length * 5.2 + 2;
+        } else {
+          y += 2;
+        }
+        doc.setTextColor(15,23,42);
+      });
+    }
+
+    const expCards = Array.from(document.querySelectorAll("#expWrap > [data-card='1']"));
+    if(expCards.length){
+      y = ensurePage(doc, y, 22);
+      y = section(doc, "Experience", y);
+      expCards.forEach(card=>{
+        y = ensurePage(doc, y, 28);
+        const t = card.querySelector("[data-exp='title']")?.value?.trim() || "Experience";
+        const d = card.querySelector("[data-exp='dates']")?.value?.trim() || "";
+        const bullets = splitLines(card.querySelector("[data-exp='bullets']")?.value || "");
+
+        doc.setFont("helvetica","bold");
+        doc.setFontSize(11);
+        doc.setTextColor(15,23,42);
+        doc.text(t, 14, y);
+        y += 5.6;
+
+        doc.setFont("helvetica","normal");
+        doc.setFontSize(10.5);
+        doc.setTextColor(51,65,85);
+        if(d){
+          doc.text(d, 14, y);
+          y += 6;
+        }
+        bullets.forEach(b=>{
+          y = ensurePage(doc, y, 10);
+          const bl = doc.splitTextToSize("• " + b, 182);
+          doc.text(bl, 14, y);
+          y += bl.length * 5.2;
+        });
+        y += 2;
+        doc.setTextColor(15,23,42);
+      });
+    }
+
+    // Projects (optional)
+    const projCards = Array.from(document.querySelectorAll("#projWrap > [data-card='1']"));
+    if(projCards.length){
+      y = ensurePage(doc, y, 22);
+      y = section(doc, "Projects", y);
+      projCards.forEach(card=>{
+        y = ensurePage(doc, y, 26);
+        const t = card.querySelector("[data-proj='title']")?.value?.trim() || "Project";
+        const tools = card.querySelector("[data-proj='tools']")?.value?.trim() || "";
+        const bullets = splitLines(card.querySelector("[data-proj='bullets']")?.value || "");
+
+        doc.setFont("helvetica","bold");
+        doc.setFontSize(11);
+        doc.setTextColor(15,23,42);
+        doc.text(t, 14, y);
+        y += 5.6;
+
+        doc.setFont("helvetica","normal");
+        doc.setFontSize(10.5);
+        doc.setTextColor(51,65,85);
+        if(tools){
+          doc.text(tools, 14, y);
+          y += 6;
+        }
+        bullets.forEach(b=>{
+          y = ensurePage(doc, y, 10);
+          const bl = doc.splitTextToSize("• " + b, 182);
+          doc.text(bl, 14, y);
+          y += bl.length * 5.2;
+        });
+        y += 2;
+        doc.setTextColor(15,23,42);
+      });
+    }
+
+    // Certificates (optional)
+    const certCards = Array.from(document.querySelectorAll("#certWrap > [data-card='1']"));
+    if(certCards.length){
+      y = ensurePage(doc, y, 18);
+      y = section(doc, "Certificates", y);
+      doc.setFont("helvetica","normal");
+      doc.setFontSize(10.5);
+      doc.setTextColor(51,65,85);
+      certCards.forEach(card=>{
+        y = ensurePage(doc, y, 10);
+        const name = card.querySelector("[data-cert='name']")?.value?.trim() || "";
+        const prov = card.querySelector("[data-cert='provider']")?.value?.trim() || "";
+        const year = card.querySelector("[data-cert='year']")?.value?.trim() || "";
+        const line = [name, prov, year].filter(Boolean).join(" • ");
+        if(line){
+          const wl = doc.splitTextToSize("• " + line, 182);
+          doc.text(wl, 14, y);
+          y += wl.length * 5.2;
+        }
+      });
+      y += 2;
+      doc.setTextColor(15,23,42);
+    }
+
+    // Branding bottom-right on every page
+    const pages = doc.getNumberOfPages();
+    for(let p=1; p<=pages; p++){
+      doc.setPage(p);
+      const pageH = doc.internal.pageSize.getHeight();
+      const xRight = 196;
+      doc.setFont("helvetica","normal");
+      doc.setFontSize(9);
+      doc.setTextColor(100,116,139);
+      doc.text("Powered by JOBSDROPS", xRight, pageH - 12, { align:"right" });
+      doc.text("Opportunities, simplified.", xRight, pageH - 7, { align:"right" });
+      doc.setTextColor(15,23,42);
+    }
+
+    // Download to device (with fallback)
+    const filename = (fullName.replace(/\s+/g,"_") || "CV") + "_JobsDrops.pdf";
+    try{
+      doc.save(filename);
+    } catch(e){
+      const blob = doc.output("blob");
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(()=>{ try{ window.open(url, "_blank"); }catch(_){} }, 200);
+      setTimeout(()=>URL.revokeObjectURL(url), 2000);
+    }
+  });
+})();
+</script>
+
+<!-- Listing modal -->
+<div id="listingModal" class="modal-overlay" aria-hidden="true">
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-top">
+      <div>
+        <div id="modalTitle" class="modal-title">Listing</div>
+        <div id="modalMeta" class="modal-meta"></div>
+      </div>
+      <button id="modalClose" class="modal-close" type="button">Close</button>
+    </div>
+    <div class="modal-body">
+      <h3>Summary</h3>
+      <p id="modalSummary"></p>
+
+      <h3>Description</h3>
+      <p id="modalDescription"></p>
+
+      <h3>Requirements</h3>
+      <ul id="modalRequirements"></ul>
+
+      <h3>How to apply</h3>
+      <p id="modalHow"></p>
+
+      <div class="modal-actions">
+        <a id="modalApply" class="btn btn-apply" href="#" target="_blank" rel="noopener">Apply</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+(function(){
+  const overlay = document.getElementById('listingModal');
+  if(!overlay) return;
+  const card = overlay.querySelector('.modal-card');
+  const closeBtn = document.getElementById('modalClose');
+
+  const t = document.getElementById('modalTitle');
+  const meta = document.getElementById('modalMeta');
+  const summary = document.getElementById('modalSummary');
+  const desc = document.getElementById('modalDescription');
+  const req = document.getElementById('modalRequirements');
+  const how = document.getElementById('modalHow');
+  const apply = document.getElementById('modalApply');
+
+  function openModal(fromCard){
+    const title = fromCard.getAttribute('data-title') || 'Listing';
+    const location = fromCard.getAttribute('data-location') || '';
+    const type = fromCard.getAttribute('data-type') || '';
+    const pay = fromCard.getAttribute('data-pay') || 'Unspecified';
+    const closing = fromCard.getAttribute('data-deadline') || '';
+
+    const s = fromCard.querySelector('[data-detail="summary"]')?.textContent?.trim() || '';
+    const d = fromCard.querySelector('[data-detail="description"]')?.textContent?.trim() || '';
+    const h = fromCard.querySelector('[data-detail="how"]')?.textContent?.trim() || '';
+    const r = Array.from(fromCard.querySelectorAll('[data-detail="requirements"] li')).map(li=>li.textContent.trim()).filter(Boolean);
+    const link = fromCard.getAttribute('data-apply') || fromCard.querySelector('a[href]')?.getAttribute('href') || '#';
+
+    t.textContent = title;
+    meta.textContent = [location, type, ("Pay: " + pay), (closing ? ("Closes: " + closing) : "")].filter(Boolean).join(' • ');
+    summary.textContent = s;
+    desc.textContent = d;
+    how.textContent = h;
+    req.innerHTML = '';
+    (r.length ? r : ["No requirements listed."]).forEach(x=>{
+      const li = document.createElement('li');
+      li.textContent = x;
+      req.appendChild(li);
+    });
+
+    apply.href = link;
+    overlay.classList.add('is-open');
+    overlay.setAttribute('aria-hidden','false');
+
+    // restart animation
+    card.style.animation = 'none';
+    // eslint-disable-next-line no-unused-expressions
+    card.offsetHeight;
+    card.style.animation = '';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal(){
+    overlay.classList.remove('is-open');
+    overlay.setAttribute('aria-hidden','true');
+    document.body.style.overflow = '';
+  }
+
+  document.addEventListener('click', (e)=>{
+    const btn = e.target.closest('[data-action="readmore"]');
+    if(btn){
+      const listing = btn.closest('[data-listing="1"]');
+      if(listing){
+        e.preventDefault();
+        openModal(listing);
+      }
+      return;
+    }
+    if(e.target === overlay) closeModal();
+  });
+
+  closeBtn?.addEventListener('click', closeModal);
+  document.addEventListener('keydown', (e)=>{
+    if(e.key === 'Escape' && overlay.classList.contains('is-open')) closeModal();
+  });
+})();
+</script>
+
+</body>
+</html>
