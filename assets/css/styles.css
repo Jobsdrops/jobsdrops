@@ -1,5 +1,5 @@
 :root{
-  --bg:#eff0f3;
+  --bg:#f7f8fb;
   --card:#ffffff;
   --text:#0f172a;
   --muted:#64748b;
@@ -9,7 +9,7 @@
   --good:#16a34a;
   --warn:#f59e0b;
   --bad:#ef4444;
-  --shadow: 0 10px 30px rgba(2, 6, 23, 0.164);
+  --shadow: 0 10px 30px rgba(2,6,23,.08);
   --radius:18px;
   --radius2:14px;
   --max:1200px;
@@ -21,8 +21,8 @@ html,body{height:100%}
 body{
   margin:0;
   font-family:var(--font);
-  background: radial-gradient(1200px 600px at 20% -10%, rgba(37, 100, 235, 0), transparent 60%),
-              radial-gradient(1200px 700px at 90% 0%, rgba(14, 164, 233, 0), transparent 55%),
+  background: radial-gradient(1200px 600px at 20% -10%, rgba(37,99,235,.10), transparent 60%),
+              radial-gradient(1200px 700px at 90% 0%, rgba(14,165,233,.10), transparent 55%),
               var(--bg);
   color:var(--text);
 }
@@ -507,8 +507,12 @@ article.card.is-open .readmore-link{ color: var(--brand-dark, #0b48c8); }
 
 /* CV Builder: mobile should stack sections vertically */
 @media (max-width: 900px){
-  .cv-layout{ display:block !important; }
-  .cv-layout .card{ margin-bottom: 14px; }
+  /* CV page uses inline grid-column spans (7/5). Force stack on mobile/tablet. */
+  .cv-page .grid > .card{ grid-column: 1 / -1 !important; }
+
+  /* Also stack CV sub-fields like Start year / End year on tablet widths */
+  .cv-page .form-grid{ grid-template-columns: 1fr; gap: 14px; }
+  .cv-page .form-grid > *{ grid-column: 1 / -1 !important; }
 }
 
 
@@ -531,3 +535,55 @@ article.card.is-open .readmore-link{ color: var(--brand-dark, #0b48c8); }
 .grid .ad-slot{
   grid-column: 1 / -1;
 }
+
+
+/* --- Auto-expiry styling (optional) --- */
+.card.is-closed{
+  opacity: .78;
+}
+.card.is-closed .meta{
+  opacity: .9;
+}
+.card .card-actions a.link.is-disabled{
+  pointer-events: none;
+  opacity: .65;
+  filter: grayscale(1);
+}
+.badge.closed{
+  /* uses existing .badge + .badge.warn palette */
+}
+
+
+/* CV Builder: mobile stacking (Basics above Education) */
+@media (max-width: 820px){
+  .cv-page .grid > .card{
+    grid-column: 1 / -1 !important;
+  }
+  .cv-page .form-grid > div{
+    grid-column: span 12 !important;
+  }
+}
+
+/* Listings: upcoming state (before open date) */
+.listing-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  font-size:12px;
+  font-weight:800;
+  padding:6px 10px;
+  border-radius:999px;
+  border:1px solid rgba(0,0,0,0.08);
+  background:rgba(255,255,255,0.9);
+}
+.card.is-upcoming{
+  opacity:0.92;
+}
+.card.is-upcoming .apply-btn,
+.card.is-upcoming a.apply,
+.card.is-upcoming [data-apply]{
+  pointer-events:none;
+  opacity:.55;
+}
+
+.badge.upcoming{background: rgba(16,185,129,.12); color: #047857; border-color: rgba(16,185,129,.22)}
