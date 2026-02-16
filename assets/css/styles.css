@@ -1,5 +1,5 @@
 :root{
-  --bg:#f7f8fb;
+  --bg:#f3f6ff;
   --card:#ffffff;
   --text:#0f172a;
   --muted:#64748b;
@@ -9,7 +9,7 @@
   --good:#16a34a;
   --warn:#f59e0b;
   --bad:#ef4444;
-  --shadow: 0 10px 30px rgba(2,6,23,.08);
+  --shadow: 0 10px 30px rgba(2, 6, 23, 0.212);
   --radius:18px;
   --radius2:14px;
   --max:1200px;
@@ -21,8 +21,8 @@ html,body{height:100%}
 body{
   margin:0;
   font-family:var(--font);
-  background: radial-gradient(1200px 600px at 20% -10%, rgba(37,99,235,.10), transparent 60%),
-              radial-gradient(1200px 700px at 90% 0%, rgba(14,165,233,.10), transparent 55%),
+  background: radial-gradient(1200px 600px at 20% -10%, rgba(37, 100, 235, 0), transparent 60%),
+              radial-gradient(1200px 700px at 90% 0%, rgba(14, 164, 233, 0), transparent 55%),
               var(--bg);
   color:var(--text);
 }
@@ -345,6 +345,11 @@ img{max-width:100%; display:block}
   .kpi{grid-template-columns:1fr; }
   .card{grid-column: span 12}
   .input, select{min-width: 0; width:100%}
+
+  /* Bursaries category chips: horizontal scroll on mobile */
+  .chips{flex-wrap:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch; gap:10px; padding-bottom:6px}
+  .chips::-webkit-scrollbar{display:none}
+  .chip{white-space:nowrap; flex:0 0 auto}
   .tools{width:100%}
 
   /* CV Builder: stack fields cleanly on small screens */
@@ -486,7 +491,7 @@ img{max-width:100%; display:block}
   padding: 0;
   border-top: 0;
 }
-article.card.is-open .listing-more{
+article.card.is-open .listing-more.is-open{
   max-height: 2200px; /* big enough for long text */
   opacity: 1;
   transform: translateY(0);
@@ -587,3 +592,101 @@ article.card.is-open .readmore-link{ color: var(--brand-dark, #0b48c8); }
 }
 
 .badge.upcoming{background: rgba(16,185,129,.12); color: #047857; border-color: rgba(16,185,129,.22)}
+
+
+/* --- JobsDrops: Apply hidden until Read more (listings only) --- */
+/* Non-listing cards (like Home feature cards) keep their actions visible. */
+[data-listing="1"] .card-actions{display:none;}
+[data-listing="1"].is-open .card-actions{display:flex;}
+/* chip active */
+.chip.active{background: rgba(37,99,235,.10); color: var(--brand); border-color: rgba(37,99,235,.20);}
+/* countdown badge colors */
+.badge.orange{background: rgba(249,115,22,.12); color:#c2410c; border-color: rgba(249,115,22,.22);}
+.badge.closed{background: rgba(239,68,68,.14); color: #b91c1c; border-color: rgba(239,68,68,.30);}
+/* small info line under status badge */
+.badge-sub{
+  margin:6px 14px 0;
+  font-size:12.5px;
+  color: var(--muted);
+  font-weight:650;
+}
+.closing-soon{
+  border:1px solid var(--border);
+  background: rgba(255,255,255,.78);
+  border-radius: var(--radius2);
+  padding:14px;
+  margin-bottom:14px;
+}
+.closing-soon h3{margin:0 0 8px; font-size:15px;}
+.closing-soon .mini-grid{display:grid; gap:10px;}
+.closing-soon .mini{
+  display:flex; align-items:flex-start; justify-content:space-between; gap:12px;
+  border:1px solid rgba(229,231,235,.9);
+  background: rgba(247,248,251,.6);
+  padding:10px 12px;
+  border-radius: 14px;
+}
+.closing-soon .mini a{color: var(--text); font-weight:800; text-decoration:none;}
+.closing-soon .mini a:hover{opacity:.9}
+
+
+/* --- Resources dropdown (nav) --- */
+.nav-details{display:inline-block; position:relative;}
+.nav-summary{list-style:none; cursor:pointer; user-select:none;}
+.nav-summary::-webkit-details-marker{display:none;}
+.nav-details[open] .nav-summary{opacity:.9;}
+.nav-menu{
+  position:absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  min-width: 190px;
+  padding: 10px;
+  border-radius: 14px;
+  background: rgba(20,20,20,.95);
+  border: 1px solid rgba(255,255,255,.12);
+  box-shadow: 0 10px 30px rgba(0,0,0,.35);
+  z-index: 50;
+}
+.nav-menu a{display:block; padding:8px 10px; border-radius:10px;}
+.nav-menu a:hover{background: rgba(255,255,255,.08);}
+@media (max-width: 720px){
+  .nav-details{display:block;}
+  .nav-menu{
+    position:static;
+    min-width: unset;
+    margin-top: 8px;
+    box-shadow:none;
+  }
+}
+
+
+/* Card headings inside non-listing content (guides/resources) */
+.card h2, .card .h2, .card h4, .card h5, .card h6{
+  margin-left: 14px;
+  margin-right: 14px;
+}
+.card ul, .card ol{
+  margin-left: 32px;
+  margin-right: 14px;
+}
+
+
+/* Read more + Apply behavior (LISTINGS ONLY)
+   We scope all hiding/moving logic to listing cards (cards with data-closing + data-type)
+   so homepage/feature cards keep their action links visible.
+*/
+.card[data-closing][data-type] .card-actions{
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.card[data-closing][data-type] .card-actions .readmore-link{
+  margin: 0;
+}
+/* When closed (not expanded), only show Read more; hide Apply */
+.card[data-closing][data-type]:not(.rm-open) .card-actions{
+  justify-content: center;
+}
+.card[data-closing][data-type]:not(.rm-open) .card-actions a.link{
+  display: none;
+}

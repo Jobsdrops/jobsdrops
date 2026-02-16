@@ -2,17 +2,18 @@ import re
 from datetime import datetime, timedelta
 from pathlib import Path
 
-GRACE_DAYS = 7
+GRACE_DAYS = 14
 DATE_FMT = "%Y-%m-%d"
 
 # Skip bursaries page (user wants to manage bursaries manually)
 SKIP_FILES = {"bursaries.html"}
 
 ARTICLE_RE = re.compile(
-    r'(<article\b[^>]*\bclass\s*=\s*["\'][^"\']*\blisting\b[^"\']*["\'][^>]*>)(.*?)(</article>)',
+    r'(<article\b[^>]*\bclass\s*=\s*["\'][^"\']*\bcard\b[^"\']*["\'][^>]*>)(.*?)(</article>)',
     re.IGNORECASE | re.DOTALL
 )
 CLOSING_RE = re.compile(r'\bdata-closing\s*=\s*["\'](\d{4}-\d{2}-\d{2})["\']', re.IGNORECASE)
+TYPE_RE = re.compile(r'\bdata-type\s*=\s*["\'](\w+)["\']', re.IGNORECASE)
 KEEP_RE = re.compile(r'\bdata-keep\s*=\s*["\']true["\']', re.IGNORECASE)
 
 def parse_date(s: str):
@@ -23,6 +24,12 @@ def parse_date(s: str):
 
 def should_remove(open_tag: str, today):
     # Never remove listings explicitly marked to keep (e.g., recurring NSFAS)
+
+    # Never remove bursaries (evergreen archive)
+    tm = TYPE_RE.search(open_tag)
+    if tm and tm.group(1).lower() == "bursary":
+        return False
+
     if KEEP_RE.search(open_tag):
         return False
 

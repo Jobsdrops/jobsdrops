@@ -28,17 +28,18 @@
           <small>Opportunities, simplified.</small>
 </span>
 </a>
-<nav aria-label="Primary navigation" class="nav">
-<a class="js-navlink" href="index.html">Home</a>
-<a class="js-navlink" href="weekly.html">Weekly Drops</a>
-<a class="js-navlink" href="students.html">Students</a>
-<a class="js-navlink" href="graduates.html">Graduates</a>
-<a class="js-navlink" href="learnerships.html">Learnerships</a>
-<a class="js-navlink" href="bursaries.html">Bursaries</a>
-<a class="js-navlink" href="cv.html">CV Builder</a>
-<a class="js-navlink" href="about.html">About</a>
-<a class="js-navlink" href="contact.html">Contact</a>
-</nav>
+<nav class="nav" aria-label="Primary navigation">
+        <a class="js-navlink" href="index.html">Home</a>
+        <a class="js-navlink" href="weekly.html">Weekly Drops</a>
+        <a class="js-navlink" href="students.html">Students</a>
+        <a class="js-navlink" href="graduates.html">Graduates</a>
+        <a class="js-navlink" href="learnerships.html">Learnerships</a>
+        <a class="js-navlink" href="bursaries.html">Bursaries</a>
+        <a class="js-navlink" href="cv.html">CV Builder</a>
+
+        <a class="js-navlink" href="about.html">About</a>
+        <a class="js-navlink" href="contact.html">Contact</a>
+      </nav>
 </div>
 <div aria-label="Mobile navigation (scroll)" class="nav-scroll">
 <a class="nav-pill js-navpill" href="index.html">Home</a>
@@ -61,204 +62,191 @@
 <div class="hero-card">
 <h1 class="h1">Bursaries &amp; Funding</h1>
 <p class="sub">Bursaries, funding, and study support opportunities.</p>
-<div class="section-head" style="margin-top:14px">
-<div>
-<h2>Search</h2>
-<p><span id="counter">0</span> results shown</p>
+<div aria-label="Bursary categories" class="chips" id="bursaryChips">
+<button class="chip active" data-cat="all" type="button">All</button>
+<button class="chip" data-cat="accounting" type="button">Accounting</button>
+<button class="chip" data-cat="stem" type="button">STEM</button>
+<button class="chip" data-cat="health" type="button">Health</button>
+<button class="chip" data-cat="education" type="button">Education</button>
+<button class="chip" data-cat="law" type="button">Law</button>
+<button class="chip" data-cat="corporate" type="button">Corporate</button>
+<button class="chip" data-cat="government" type="button">Government / SETA</button>
+<button class="chip" data-cat="scholarships" type="button">Scholarships</button>
+<button class="chip" data-cat="loans" type="button">Student Loans</button>
 </div>
-<div class="tools">
-<input autocomplete="off" class="input" id="q" placeholder="Search (role, company, location…)" type="search"/>
-<select aria-label="Type filter" id="type">
-<option value="all">All types</option>
-<option value="student">Student</option>
-<option value="internship">Internship</option>
-<option value="learnership">Learnership</option>
-<option value="bursary">Bursary</option>
-<option value="job">Job</option>
-<option value="short-course">Short course</option>
-</select>
-<select aria-label="Province filter" id="province">
-<option value="all">All provinces</option>
-<option value="gauteng">Gauteng</option>
-<option value="western-cape">Western Cape</option>
-<option value="kwazulu-natal">KwaZulu-Natal</option>
-<option value="limpopo">Limpopo</option>
-<option value="national">National</option>
-</select>
-<button class="btn" id="resetBtn" type="button">Reset</button>
-</div>
-</div>
-<div class="small" style="margin-top:10px;color:var(--muted)">
-</div>
+<div class="small" style="margin-top:10px;color:var(--muted)"><span id="counter">0</span> bursaries shown</div>
 </div>
 </div>
 </section>
 <section class="section">
 <div class="container">
+<div aria-label="Closing this month section" class="closing-soon" hidden="" id="closingSoonRoot">
+<h3>Closing this month (Next 30 days)</h3>
+<div class="small" style="color:var(--muted);margin-bottom:10px">Deadlines coming up, prioritize these first.</div>
+<div class="mini-grid" id="closingSoonList"></div>
+</div>
+
 <div class="ad-slot" style="margin-bottom:14px">----</div>
 <div aria-label="Listings grid" class="grid" id="listRoot">
-
-          <article class="card" data-province="national" data-search="engineering bursary (2026 intake) — south africa support for stem students. includes tuition + allowance (terms apply)." data-type="bursary">
-            <div class="card-top">
-              <span class="badge">Bursary</span>
-              <span class="badge good">Open</span>
-            </div>
-            <h3>Engineering Bursary (2026 Intake) — South Africa</h3>
-            <p>Support for STEM students. Includes tuition + allowance (terms apply).</p>
-            <div class="meta">
-              <span>Online</span><span class="dot"></span><span>National</span><span class="dot"></span><span>Closes: 30 Mar</span>
-            </div>
-            <button aria-expanded="false" class="readmore-link" type="button">Read more</button>
-            <div class="card-actions">
-              <a class="link" href="https://example.com/engineering-bursary" rel="noopener" target="_blank">Apply →</a>
+<article class="card" data-category="accounting" data-closing="2026-03-30" data-province="national" data-search="engineering bursary (2026 intake) — south africa support for stem students. includes tuition + allowance (terms apply)." data-type="bursary">
+<div class="card-top">
+<span class="badge">Bursary</span>
+<span class="badge good">Open</span>
 </div>
-            <div class="listing-more" hidden="">
-              <h4>More details</h4>
-              <p>Support for STEM students. Includes tuition + allowance (terms apply).</p>
-              <p>Double-check dates, documents, and eligibility before applying. If anything is unclear, keep your application short, honest, and on time.</p>
-              <h5>Summary</h5>
-              <p>Clear overview of what this opportunity is, who it’s for, and what you’ll do.</p>
-              <h5>Requirements</h5>
-              <p>Basic eligibility and what you should have ready before applying.</p>
-              <h5>How to apply</h5>
-              <p>Use the Apply button to open the source and follow the instructions on the page.</p>
-            </div>
-          </article>
-          <article class="card" data-province="limpopo" data-search="nursing study funding — limpopo funding support for nursing students at accredited institutions." data-type="bursary">
-            <div class="card-top">
-              <span class="badge">Bursary</span>
-              <span class="badge good">New</span>
-            </div>
-            <h3>Nursing Study Funding — Limpopo</h3>
-            <p>Funding support for nursing students at accredited institutions.</p>
-            <div class="meta">
-              <span>Polokwane</span><span class="dot"></span><span>Limpopo</span><span class="dot"></span><span>Closes: 15 Mar</span>
-            </div>
-            <button aria-expanded="false" class="readmore-link" type="button">Read more</button>
-            <div class="card-actions">
-              <a class="link" href="https://example.com/nursing-funding" rel="noopener" target="_blank">Apply →</a>
+<h3>Engineering Bursary (2026 Intake) — South Africa</h3>
+<p>Support for STEM students. Includes tuition + allowance (terms apply).</p>
+<div class="meta">
+<span>Online</span><span class="dot"></span><span>National</span><span class="dot"></span><span>Closes: 30 Mar</span>
 </div>
-            <div class="listing-more" hidden="">
-              <h4>More details</h4>
-              <p>Funding support for nursing students at accredited institutions.</p>
-              <p>Double-check dates, documents, and eligibility before applying. If anything is unclear, keep your application short, honest, and on time.</p>
-              <h5>Summary</h5>
-              <p>Clear overview of what this opportunity is, who it’s for, and what you’ll do.</p>
-              <h5>Requirements</h5>
-              <p>Basic eligibility and what you should have ready before applying.</p>
-              <h5>How to apply</h5>
-              <p>Use the Apply button to open the source and follow the instructions on the page.</p>
-            </div>
-          </article>
-          <article class="card" data-province="national" data-search="teacher education bursary — national study support for future educators (priority subjects)." data-type="bursary">
-            <div class="card-top">
-              <span class="badge">Bursary</span>
-              <span class="badge warn">Hot</span>
-            </div>
-            <h3>Teacher Education Bursary — National</h3>
-            <p>Study support for future educators (priority subjects).</p>
-            <div class="meta">
-              <span>Online</span><span class="dot"></span><span>National</span><span class="dot"></span><span>Closes: 10 Apr</span>
-            </div>
-            <button aria-expanded="false" class="readmore-link" type="button">Read more</button>
-            <div class="card-actions">
-              <a class="link" href="https://example.com/teaching-bursary" rel="noopener" target="_blank">Apply →</a>
+<button aria-expanded="false" class="readmore-link" type="button">Read more</button>
+<div class="card-actions">
+<a class="link" href="https://example.com/engineering-bursary" rel="noopener" target="_blank">Apply →</a>
 </div>
-            <div class="listing-more" hidden="">
-              <h4>More details</h4>
-              <p>Study support for future educators (priority subjects).</p>
-              <p>Double-check dates, documents, and eligibility before applying. If anything is unclear, keep your application short, honest, and on time.</p>
-              <h5>Summary</h5>
-              <p>Clear overview of what this opportunity is, who it’s for, and what you’ll do.</p>
-              <h5>Requirements</h5>
-              <p>Basic eligibility and what you should have ready before applying.</p>
-              <h5>How to apply</h5>
-              <p>Use the Apply button to open the source and follow the instructions on the page.</p>
-            </div>
-          </article>
-          <article class="card" data-province="national" data-search="tvet student loan support — south africa student loan support for tvet studies with flexible repayment options." data-type="loan">
-            <div class="card-top">
-              <span class="badge">Student Loan</span>
-              <span class="badge good">Open</span>
-            </div>
-            <h3>TVET Student Loan Support — South Africa</h3>
-            <p>Student loan support for TVET studies with flexible repayment options.</p>
-            <div class="meta">
-              <span>Online</span><span class="dot"></span><span>National</span><span class="dot"></span><span>Closes: 05 Apr</span>
-            </div>
-            <button aria-expanded="false" class="readmore-link" type="button">Read more</button>
-            <div class="card-actions">
-              <a class="link" href="https://example.com/tvet-loan" rel="noopener" target="_blank">Apply →</a>
+<div class="listing-more" hidden="">
+<h4>More details</h4>
+<p>Support for STEM students. Includes tuition + allowance (terms apply).</p>
+<p>Double-check dates, documents, and eligibility before applying. If anything is unclear, keep your application short, honest, and on time.</p>
+<h5>Summary</h5>
+<p>Clear overview of what this opportunity is, who it’s for, and what you’ll do.</p>
+<h5>Requirements</h5>
+<p>Basic eligibility and what you should have ready before applying.</p>
+<h5>How to apply</h5>
+<p>Use the Apply button to open the source and follow the instructions on the page.</p>
 </div>
-            <div class="listing-more" hidden="">
-              <h4>More details</h4>
-              <p>Student loan support for TVET studies with flexible repayment options.</p>
-              <p>Double-check dates, documents, and eligibility before applying. If anything is unclear, keep your application short, honest, and on time.</p>
-              <h5>Summary</h5>
-              <p>Clear overview of what this opportunity is, who it’s for, and what you’ll do.</p>
-              <h5>Requirements</h5>
-              <p>Basic eligibility and what you should have ready before applying.</p>
-              <h5>How to apply</h5>
-              <p>Use the Apply button to open the source and follow the instructions on the page.</p>
-            </div>
-          </article>
-          <article class="card" data-province="gauteng" data-search="commerce &amp; accounting bursary — gauteng tuition support for commerce students (selected universities)." data-type="bursary">
-            <div class="card-top">
-              <span class="badge">Bursary</span>
-              <span class="badge good">New</span>
-            </div>
-            <h3>Commerce &amp; Accounting Bursary — Gauteng</h3>
-            <p>Tuition support for commerce students (selected universities).</p>
-            <div class="meta">
-              <span>Johannesburg</span><span class="dot"></span><span>Gauteng</span><span class="dot"></span><span>Closes: 22 Mar</span>
-            </div>
-            <button aria-expanded="false" class="readmore-link" type="button">Read more</button>
-            <div class="card-actions">
-              <a class="link" href="https://example.com/commerce-bursary" rel="noopener" target="_blank">Apply →</a>
+</article>
+<article class="card" data-category="stem" data-closing="2026-03-15" data-province="limpopo" data-search="nursing study funding — limpopo funding support for nursing students at accredited institutions." data-type="bursary">
+<div class="card-top">
+<span class="badge">Bursary</span>
+<span class="badge good">New</span>
 </div>
-            <div class="listing-more" hidden="">
-              <h4>More details</h4>
-              <p>Tuition support for commerce students (selected universities).</p>
-              <p>Double-check dates, documents, and eligibility before applying. If anything is unclear, keep your application short, honest, and on time.</p>
-              <h5>Summary</h5>
-              <p>Clear overview of what this opportunity is, who it’s for, and what you’ll do.</p>
-              <h5>Requirements</h5>
-              <p>Basic eligibility and what you should have ready before applying.</p>
-              <h5>How to apply</h5>
-              <p>Use the Apply button to open the source and follow the instructions on the page.</p>
-            </div>
-          </article>
-          <article class="card" data-province="western-cape" data-search="it &amp; data bursary — western cape funding for it students with mentorship and holiday work exposure." data-type="bursary">
-            <div class="card-top">
-              <span class="badge">Bursary</span>
-              <span class="badge warn">Hot</span>
-            </div>
-            <h3>IT &amp; Data Bursary — Western Cape</h3>
-            <p>Funding for IT students with mentorship and holiday work exposure.</p>
-            <div class="meta">
-              <span>Cape Town</span><span class="dot"></span><span>Western Cape</span><span class="dot"></span><span>Closes: 18 Mar</span>
-            </div>
-            <button aria-expanded="false" class="readmore-link" type="button">Read more</button>
-            <div class="card-actions">
-              <a class="link" href="https://example.com/it-bursary" rel="noopener" target="_blank">Apply →</a>
+<h3>Nursing Study Funding — Limpopo</h3>
+<p>Funding support for nursing students at accredited institutions.</p>
+<div class="meta">
+<span>Polokwane</span><span class="dot"></span><span>Limpopo</span><span class="dot"></span><span>Closes: 15 Mar</span>
 </div>
-            <div class="listing-more" hidden="">
-              <h4>More details</h4>
-              <p>Funding for IT students with mentorship and holiday work exposure.</p>
-              <p>Double-check dates, documents, and eligibility before applying. If anything is unclear, keep your application short, honest, and on time.</p>
-              <h5>Summary</h5>
-              <p>Clear overview of what this opportunity is, who it’s for, and what you’ll do.</p>
-              <h5>Requirements</h5>
-              <p>Basic eligibility and what you should have ready before applying.</p>
-              <h5>How to apply</h5>
-              <p>Use the Apply button to open the source and follow the instructions on the page.</p>
-            </div>
-          </article>
-        
+<button aria-expanded="false" class="readmore-link" type="button">Read more</button>
+<div class="card-actions">
+<a class="link" href="https://example.com/nursing-funding" rel="noopener" target="_blank">Apply →</a>
+</div>
+<div class="listing-more" hidden="">
+<h4>More details</h4>
+<p>Funding support for nursing students at accredited institutions.</p>
+<p>Double-check dates, documents, and eligibility before applying. If anything is unclear, keep your application short, honest, and on time.</p>
+<h5>Summary</h5>
+<p>Clear overview of what this opportunity is, who it’s for, and what you’ll do.</p>
+<h5>Requirements</h5>
+<p>Basic eligibility and what you should have ready before applying.</p>
+<h5>How to apply</h5>
+<p>Use the Apply button to open the source and follow the instructions on the page.</p>
+</div>
+</article>
+<article class="card" data-category="accounting" data-closing="2026-04-10" data-province="national" data-search="teacher education bursary — national study support for future educators (priority subjects)." data-type="bursary">
+<div class="card-top">
+<span class="badge">Bursary</span>
+<span class="badge warn">Hot</span>
+</div>
+<h3>Teacher Education Bursary — National</h3>
+<p>Study support for future educators (priority subjects).</p>
+<div class="meta">
+<span>Online</span><span class="dot"></span><span>National</span><span class="dot"></span><span>Closes: 10 Apr</span>
+</div>
+<button aria-expanded="false" class="readmore-link" type="button">Read more</button>
+<div class="card-actions">
+<a class="link" href="https://example.com/teaching-bursary" rel="noopener" target="_blank">Apply →</a>
+</div>
+<div class="listing-more" hidden="">
+<h4>More details</h4>
+<p>Study support for future educators (priority subjects).</p>
+<p>Double-check dates, documents, and eligibility before applying. If anything is unclear, keep your application short, honest, and on time.</p>
+<h5>Summary</h5>
+<p>Clear overview of what this opportunity is, who it’s for, and what you’ll do.</p>
+<h5>Requirements</h5>
+<p>Basic eligibility and what you should have ready before applying.</p>
+<h5>How to apply</h5>
+<p>Use the Apply button to open the source and follow the instructions on the page.</p>
+</div>
+</article>
+<article class="card" data-category="accounting" data-closing="2026-04-05" data-province="national" data-search="tvet student loan support — south africa student loan support for tvet studies with flexible repayment options." data-type="loan">
+<div class="card-top">
+<span class="badge">Student Loan</span>
+<span class="badge good">Open</span>
+</div>
+<h3>TVET Student Loan Support — South Africa</h3>
+<p>Student loan support for TVET studies with flexible repayment options.</p>
+<div class="meta">
+<span>Online</span><span class="dot"></span><span>National</span><span class="dot"></span><span>Closes: 05 Apr</span>
+</div>
+<button aria-expanded="false" class="readmore-link" type="button">Read more</button>
+<div class="card-actions">
+<a class="link" href="https://example.com/tvet-loan" rel="noopener" target="_blank">Apply →</a>
+</div>
+<div class="listing-more" hidden="">
+<h4>More details</h4>
+<p>Student loan support for TVET studies with flexible repayment options.</p>
+<p>Double-check dates, documents, and eligibility before applying. If anything is unclear, keep your application short, honest, and on time.</p>
+<h5>Summary</h5>
+<p>Clear overview of what this opportunity is, who it’s for, and what you’ll do.</p>
+<h5>Requirements</h5>
+<p>Basic eligibility and what you should have ready before applying.</p>
+<h5>How to apply</h5>
+<p>Use the Apply button to open the source and follow the instructions on the page.</p>
+</div>
+</article>
+<article class="card" data-category="accounting" data-closing="2026-03-22" data-province="gauteng" data-search="commerce &amp; accounting bursary — gauteng tuition support for commerce students (selected universities)." data-type="bursary">
+<div class="card-top">
+<span class="badge">Bursary</span>
+<span class="badge good">New</span>
+</div>
+<h3>Commerce &amp; Accounting Bursary — Gauteng</h3>
+<p>Tuition support for commerce students (selected universities).</p>
+<div class="meta">
+<span>Johannesburg</span><span class="dot"></span><span>Gauteng</span><span class="dot"></span><span>Closes: 22 Mar</span>
+</div>
+<button aria-expanded="false" class="readmore-link" type="button">Read more</button>
+<div class="card-actions">
+<a class="link" href="https://example.com/commerce-bursary" rel="noopener" target="_blank">Apply →</a>
+</div>
+<div class="listing-more" hidden="">
+<h4>More details</h4>
+<p>Tuition support for commerce students (selected universities).</p>
+<p>Double-check dates, documents, and eligibility before applying. If anything is unclear, keep your application short, honest, and on time.</p>
+<h5>Summary</h5>
+<p>Clear overview of what this opportunity is, who it’s for, and what you’ll do.</p>
+<h5>Requirements</h5>
+<p>Basic eligibility and what you should have ready before applying.</p>
+<h5>How to apply</h5>
+<p>Use the Apply button to open the source and follow the instructions on the page.</p>
+</div>
+</article>
+<article class="card" data-category="accounting" data-closing="2026-03-18" data-province="western-cape" data-search="it &amp; data bursary — western cape funding for it students with mentorship and holiday work exposure." data-type="bursary">
+<div class="card-top">
+<span class="badge">Bursary</span>
+<span class="badge warn">Hot</span>
+</div>
+<h3>IT &amp; Data Bursary — Western Cape</h3>
+<p>Funding for IT students with mentorship and holiday work exposure.</p>
+<div class="meta">
+<span>Cape Town</span><span class="dot"></span><span>Western Cape</span><span class="dot"></span><span>Closes: 18 Mar</span>
+</div>
+<button aria-expanded="false" class="readmore-link" type="button">Read more</button>
+<div class="card-actions">
+<a class="link" href="https://example.com/it-bursary" rel="noopener" target="_blank">Apply →</a>
+</div>
+<div class="listing-more" hidden="">
+<h4>More details</h4>
+<p>Funding for IT students with mentorship and holiday work exposure.</p>
+<p>Double-check dates, documents, and eligibility before applying. If anything is unclear, keep your application short, honest, and on time.</p>
+<h5>Summary</h5>
+<p>Clear overview of what this opportunity is, who it’s for, and what you’ll do.</p>
+<h5>Requirements</h5>
+<p>Basic eligibility and what you should have ready before applying.</p>
+<h5>How to apply</h5>
+<p>Use the Apply button to open the source and follow the instructions on the page.</p>
+</div>
+</article>
 </div>
 <div class="ad-slot" style="margin-top:14px">----</div>
-
-</section>
+</div></section>
 </main>
 <footer class="footer">
 <div class="container">
@@ -294,7 +282,6 @@
 <div aria-live="polite" class="toast" id="toast" role="status"></div>
 <script defer="" src="assets/js/app.js"></script>
 <!-- Listing modal -->
-
 <script>
 (function(){
   const overlay = document.getElementById('listingModal');
