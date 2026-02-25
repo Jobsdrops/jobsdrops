@@ -3,6 +3,9 @@
   const $ = (sel, root) => (root || document).querySelector(sel);
   const $$ = (sel, root) => Array.from((root || document).querySelectorAll(sel));
 
+  const MOBILE_BREAKPOINT = 768;
+  const isMobile = () => window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT}px)`).matches;
+
   function toast(msg){
     const el = $("#toast");
     if(!el) return;
@@ -377,63 +380,130 @@ function applyExpiry(){
 
     
 function initReadMoreCards(){
-  const cards = $$(LISTING_SEL, listRoot);
+  // Read-more should work for *any* real listing card that contains the expected UI parts,
+  // even if it doesn't have data-closing / data-type (e.g. short-courses, guides, etc).
+  const cards = $$(".card", listRoot).filter(card =>
+    card.querySelector(".readmore-link") && card.querySelector(".listing-more")
+  );
+
   cards.forEach(card=>{
     const btn = card.querySelector(".readmore-link");
     const more = card.querySelector(".listing-more");
-    const actions = card.querySelector(".card-actions");
-    if(!btn || !actions) return;
+    const actions = card.querySelector(".card-actions"); // optional but recommended
+    if(!btn || !more) return;
 
-    // Ensure structural order: expanded content before actions, controls at bottom
-    if(more && more.parentNode === card && more.nextElementSibling !== actions){
-      card.insertBefore(more, actions);
-    }
-    if(!actions.contains(btn)){
-      actions.insertAdjacentElement("afterbegin", btn);
+    // Create a stable anchor so we can move the toggle button around and restore it.
+    if(!card._rmAnchor){
+      const anchor = document.createComment("rm-anchor");
+      btn.parentNode.insertBefore(anchor, btn);
+      card._rmAnchor = anchor;
     }
 
-    // Normalize initial state
-    const expanded = btn.getAttribute("aria-expanded") === "true";
-    if(more){
-      if(expanded){
-        more.hidden = false;
-        more.classList.add("is-open");
-        card.classList.add("rm-open");
-        btn.textContent = "Read less";
-      }else{
-        more.classList.remove("is-open");
-        more.hidden = true;
-        card.classList.remove("rm-open");
-        btn.setAttribute("aria-expanded","false");
-        btn.textContent = "Read more";
+    // Build a bottom controls row inside the expanded section.
+    let bottom = more.querySelector(".rm-bottom");
+    if(!bottom){
+      bottom = document.createElement("div");
+      bottom.className = "rm-bottom";
+      more.appendChild(bottom);
+    }
+
+    // Put Apply (actions) and Read less at the bottom when expanded.
+    if(actions){
+      // Hide actions by default until expanded.
+      actions.hidden = true;
+
+      // Ensure actions are inside bottom controls when expanded.
+      if(!bottom.contains(actions)){
+        bottom.appendChild(actions);
       }
+    }
+
+    // Ensure button ends up in the right place depending on state.
+    const expanded = btn.getAttribute("aria-expanded") === "true";
+    if(expanded){
+      more.hidden = false;
+      more.classList.add("is-open");
+      card.classList.add("is-open");
+      btn.textContent = "Read less";
+      btn.setAttribute("aria-expanded","true");
+      // Move toggle to bottom (after actions if present)
+      if(!bottom.contains(btn)){
+        bottom.appendChild(btn);
+      }
+      if(actions) actions.hidden = false;
+    }else{
+      more.classList.remove("is-open");
+      more.hidden = true;
+      card.classList.remove("is-open");
+      btn.setAttribute("aria-expanded","false");
+      btn.textContent = "Read more";
+      // Restore button to its original spot (outside expanded content)
+      if(card._rmAnchor && card._rmAnchor.parentNode){
+        card._rmAnchor.parentNode.insertBefore(btn, card._rmAnchor.nextSibling);
+      }
+      if(actions) actions.hidden = true;
     }
 
     if(btn.dataset.bound === "1") return;
     btn.dataset.bound = "1";
 
     btn.addEventListener("click", ()=>{
-      if(!more) return;
-      const isOpen = card.classList.contains("rm-open");
+      const isOpen = card.classList.contains("is-open");
+
+      // Auto-close other open cards on mobile (keeps the page clean)
+      if(isMobile()){
+        $$(".card.is-open", listRoot).forEach(other=>{
+        if(other !== card){
+          const obtn = other.querySelector(".readmore-link");
+          const omore = other.querySelector(".listing-more");
+          const oactions = other.querySelector(".card-actions");
+          if(obtn){
+            obtn.setAttribute("aria-expanded","false");
+            obtn.textContent = "Read more";
+            // restore button
+            if(other._rmAnchor && other._rmAnchor.parentNode){
+              other._rmAnchor.parentNode.insertBefore(obtn, other._rmAnchor.nextSibling);
+            }
+          }
+          if(omore){
+            omore.classList.remove("is-open");
+            omore.hidden = true;
+          }
+          if(oactions) oactions.hidden = true;
+          other.classList.remove("is-open");
+        }
+      });
+      }
 
       if(!isOpen){
-        // Store where the user was before expanding (for smooth return)
         card.dataset.rmScroll = String(window.scrollY);
 
         more.hidden = false;
+        if(actions) actions.hidden = false;
+
+        // Move controls to bottom for expanded view
+        if(!bottom.contains(btn)){
+          bottom.appendChild(btn);
+        }
         // Let hidden removal apply before animating
         requestAnimationFrame(()=> more.classList.add("is-open"));
-        card.classList.add("rm-open");
+        card.classList.add("is-open");
         btn.setAttribute("aria-expanded","true");
         btn.textContent = "Read less";
       }else{
         more.classList.remove("is-open");
-        card.classList.remove("rm-open");
+        card.classList.remove("is-open");
         btn.setAttribute("aria-expanded","false");
         btn.textContent = "Read more";
 
         // After transition, hide content for accessibility
         setTimeout(()=>{ more.hidden = true; }, 380);
+        if(actions) actions.hidden = true;
+
+        // Restore button to original spot (outside expanded content)
+        if(card._rmAnchor && card._rmAnchor.parentNode){
+          card._rmAnchor.parentNode.insertBefore(btn, card._rmAnchor.nextSibling);
+        }
 
         const prevY = Number(card.dataset.rmScroll || "");
         if(Number.isFinite(prevY)){

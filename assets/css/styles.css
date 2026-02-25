@@ -672,7 +672,7 @@ article.card.is-open .readmore-link{ color: var(--brand-dark, #0b48c8); }
 
 
 /* Read more + Apply behavior (LISTINGS ONLY)
-   We scope all hiding/moving logic to listing cards (cards with data-closing + data-type)
+   We scope any extra layout tweaks to listing cards (cards with data-closing + data-type)
    so homepage/feature cards keep their action links visible.
 */
 .card[data-closing][data-type] .card-actions{
@@ -683,10 +683,28 @@ article.card.is-open .readmore-link{ color: var(--brand-dark, #0b48c8); }
 .card[data-closing][data-type] .card-actions .readmore-link{
   margin: 0;
 }
-/* When closed (not expanded), only show Read more; hide Apply */
-.card[data-closing][data-type]:not(.rm-open) .card-actions{
+/* When closed (not expanded), hide Apply; when open, show it.
+   NOTE: JS also toggles .card-actions via [hidden], but this CSS keeps things consistent.
+*/
+.card[data-closing][data-type]:not(.is-open) .card-actions{
   justify-content: center;
 }
-.card[data-closing][data-type]:not(.rm-open) .card-actions a.link{
+.card[data-closing][data-type]:not(.is-open) .card-actions a.link{
   display: none;
+}
+
+
+/* Read more / Apply / Read less controls at the bottom of expanded content */
+.rm-bottom{
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 14px;
+}
+.rm-bottom .card-actions{
+  display: flex;
+  gap: 10px;
+  margin: 0;
 }
